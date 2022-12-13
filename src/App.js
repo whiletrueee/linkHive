@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Header from "./Header";
+import People from "./People";
+import Share from "./Share";
+import ShareButton from "./ShareButton";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-[400px] overflow-hidden bg-black">
+      <Header />
+      <Share />
+      <div className="m-[20px] flex gap-4 flex-wrap">
+        <People />
+        <People />
+        <People />
+        <People />
+        <People />
+      </div>
+      <ShareButton />
     </div>
   );
 }
