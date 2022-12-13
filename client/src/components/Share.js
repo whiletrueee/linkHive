@@ -6,7 +6,7 @@ import People from "./People";
 function Share() {
   const [message, setMessage] = useState('');
   const [success, setSuccess] = useState('');
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(window.location.toString());
   const [sendto, setSendto] = useState('');
 
   const handleSendto = async () => {
@@ -28,24 +28,29 @@ function Share() {
 
   return (
     <>
-      <div className="flex flex-col gap-[20px] mt-[20px] px-[20px]">
+      <div className="flex flex-col gap-[10px] mt-[20px] px-[20px]">
+        <label className="text-pink-500">Enter message</label>
         <input
+        type='text'
           placeholder="Enter message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="outline-none p-2 w-full bg-gray-600 text-gray-200 placeholder:text-gray-200 rounded-lg"
         />
+        <label className="text-pink-500">Paste Link to share</label>
         <input
+        type="url"
           placeholder="Url to be shared"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className="outline-none p-2 w-full bg-gray-600 text-gray-200 placeholder:text-gray-200 rounded-lg"
         />
+        <label className="text-pink-500">Send to</label>
         <input
-          placeholder="send to :"
+        placeholder="Enter Mail"
           value={sendto}
           onChange={(e) => setSendto(e.target.value)}
-          className="outline-none p-2 w-full bg-green-600 text-black placeholder:text-black rounded-lg"
+          className="outline-none p-2 w-full bg-yellow-600 text-black placeholder:text-black rounded-lg"
         />
       </div>
       <div className="m-[20px] flex gap-4 flex-wrap">
