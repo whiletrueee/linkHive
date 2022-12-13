@@ -1,26 +1,62 @@
 import { useState } from "react";
 import ShareButton from "./ShareButton";
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
 
 function SignIn(props) {
-  const supabase = createClient('https://qgmucqaljwipbdatwznn.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnbXVjcWFsandpcGJkYXR3em5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTk1NDM2MDYsImV4cCI6MTk3NTExOTYwNn0.RIBHHg5wOIFBjBMCmPNbLD2DP6YkLJvG9kLaB5UWDqA')
+  const supabase = createClient(
+    "https://qgmucqaljwipbdatwznn.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnbXVjcWFsandpcGJkYXR3em5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTk1NDM2MDYsImV4cCI6MTk3NTExOTYwNn0.RIBHHg5wOIFBjBMCmPNbLD2DP6YkLJvG9kLaB5UWDqA"
+  );
   const [password, setPassword] = useState();
   const [email, setEmail] = useState();
+  const [signedIn, setSignedIn] = useState(false);
   const submitFunc = () => {
-    supabase.auth.signUp({
-      email: email,
-      password: password,
-    }).then((data, error)=>{
-      console.log(data,error)
-    })
-  }
+    supabase.auth
+      .signUp({
+        email: email,
+        password: password,
+      })
+      .then((e) => {
+        const {data, error} = e;
+        if(error){
+          if(error.message === "User already registered"){
+            console.log(error.message)
+            supabase.auth
+            .signInWithPassword({
+              email: email,
+              password: password,
+            }).then(signInData => {
+              
+              if(signInData.error){
+                console.log(signInData.error);
+                return;
+              }
+              console.log(signInData);
+              // eslint-disable-next-line no-undef
+              chrome.storage.local.set({ authToken: signInData.data.session.access_token, data: {user: signInData.data.user} }, function () {
+              });
+              setSignedIn(true);
+            })
+          }
+        }
+        else{
+          // eslint-disable-next-line no-undef
+          chrome.storage.local.set({ authToken: data.session.access_token, data: {user: data.user} }, function () {
+          });
+          setSignedIn(true);
+        }
+      });
+  };
 
   return (
     <>
       <div className="flex flex-col items-center justify-center text-purple-500 font-bold text-lg mt-5">
         <div className="mb-[10px] h-20 w-20 rounded-full">
-          <img src={`https://avatars.dicebear.com/api/bottts/${email}.svg`} alt="display" />
-          </div>
+          <img
+            src={`https://avatars.dicebear.com/api/bottts/${email}.svg`}
+            alt="display"
+          />
+        </div>
         Sign Up
       </div>
 
@@ -43,7 +79,7 @@ function SignIn(props) {
         <ShareButton label="Sign In" />
       </div>
       <div className="text-gray-400 px-4 text-xs font-bold mt-[20px]">
-        Didn't have an account ? No worries ! Just Sign In
+        Don't have an account ? No worries ! Just Sign In and we'll manage the rest.
       </div>
     </>
   );
