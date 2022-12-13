@@ -1,22 +1,19 @@
-import "./App.css";
-import Header from "./Header";
-import People from "./People";
-import Share from "./Share";
-import ShareButton from "./ShareButton";
+import { useState } from "react";
+import "./styles/App.css";
+import Main from "./components/Main";
+import Signup from "./components/Signup";
+import Header from "./components/Header";
+
 function App() {
+  const [signup, setSignup] = useState(false);
+
   return (
-    <div className="w-[400px] overflow-hidden bg-black">
-      <Header />
-      <Share />
-      <div className="m-[20px] flex gap-4 flex-wrap">
-        <People />
-        <People />
-        <People />
-        <People />
-        <People />
-      </div>
-      <ShareButton />
+    <>
+    <Header signup={signup} setSignup={setSignup} />
+    <div className="w-[400px] overflow-hidden bg-black h-[400px]">
+      {signup ? <Main /> : <Signup setSignup={setSignup} />}
     </div>
+    </>
   );
 }
 
