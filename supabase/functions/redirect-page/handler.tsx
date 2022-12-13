@@ -2,6 +2,13 @@ import React from 'https://esm.sh/react@18.2.0'
 import { ImageResponse } from 'https://deno.land/x/og_edge@0.0.4/mod.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 export default async function handler(req: Request) {
+    const supabaseClient = createClient(
+        Deno.env.get('SUPABASE_URL') ?? '',
+        Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
+      )
+      const url = new URL(req.url)
+      const { data, error } = await supabaseClient.from('users').update({ verified: true }).eq('email', url.searchParams.get('email'));
+      if (error) throw error
     if (req.method === 'OPTIONS') {
         return new Response('ok', { headers: { 
             'Access-Control-Allow-Origin': '*',
