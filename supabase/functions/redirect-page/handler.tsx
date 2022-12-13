@@ -18,9 +18,6 @@ export default async function handler(req: Request) {
     >
       <div tw="flex items-start justify-start h-full">
         <div tw="flex flex-col justify-between w-full h-full p-20">
-          {/* Replace with your own logo */}
-          
-
           <h1 tw="text-[60px] text-white font-bold text-left">{"Successfully signed up!"}</h1>
           <h1 tw="text-[25px] text-white font-bold text-left font-sans">{"Fun Fact: Sending or saving a link with instant URL takes less time than reading this (We know because we calculated it, pfft nerds)."}</h1>
 
