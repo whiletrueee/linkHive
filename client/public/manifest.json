@@ -6,7 +6,7 @@
     "default_title": "Click to show an alert",
     "default_popup": "index.html"
   },
-  "permissions": ["activeTab", "scripting","storage"],
+  "permissions": ["tabs", "scripting","storage"],
   "background": {
     "service_worker": "background.js"
   }
