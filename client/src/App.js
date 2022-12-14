@@ -8,12 +8,12 @@ function App() {
   const [signup, setSignup] = useState(false);
 
   return (
-    <>
+    <div className="w-[400px] overflow-hidden bg-black h-[450px] font-roboto">
     <Header signup={signup} setSignup={setSignup} />
-    <div className="w-[400px] overflow-hidden bg-black h-[400px]">
+    <div className="">
       {signup ? <Main /> : <Signup setSignup={setSignup} />}
     </div>
-    </>
+    </div>
   );
 }
 
