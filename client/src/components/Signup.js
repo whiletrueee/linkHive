@@ -1,15 +1,17 @@
 import { useState } from "react";
 import ShareButton from "./ShareButton";
 import { createClient } from "@supabase/supabase-js";
+import LoadingMessage from "./LoadingMessage";
 
 function SignIn(props) {
   const supabase = createClient(
     "https://qgmucqaljwipbdatwznn.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnbXVjcWFsandpcGJkYXR3em5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTk1NDM2MDYsImV4cCI6MTk3NTExOTYwNn0.RIBHHg5wOIFBjBMCmPNbLD2DP6YkLJvG9kLaB5UWDqA"
   );
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
-  const [signedIn, setSignedIn] = useState(false);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [messageDisplay, setMessageDisplay] = useState('');
+
   const submitFunc = () => {
     supabase.auth
       .signUp({
@@ -17,33 +19,40 @@ function SignIn(props) {
         password: password,
       })
       .then((e) => {
-        const {data, error} = e;
-        if(error){
-          if(error.message === "User already registered"){
-            console.log(error.message)
+        const { data, error } = e;
+        if (error) {
+          if (error.message === "User already registered") {
+            setMessageDisplay(LoadingMessage[Math.floor(Math.random() * LoadingMessage.length)])
+            console.log(error.message);
             supabase.auth
-            .signInWithPassword({
-              email: email,
-              password: password,
-            }).then(signInData => {
-              
-              if(signInData.error){
-                console.log(signInData.error);
-                return;
-              }
-              console.log(signInData);
-              // eslint-disable-next-line no-undef
-              chrome.storage.local.set({ authToken: signInData.data.session.access_token, data: {user: signInData.data.user} }, function () {
+              .signInWithPassword({
+                email: email,
+                password: password,
+              })
+              .then((signInData) => {
+                if (signInData.error) {
+                  console.log(signInData.error);
+                  return;
+                }
+                console.log(signInData);
+                // eslint-disable-next-line no-undef
+                chrome.storage.local.set(
+                  {
+                    authToken: signInData.data.session.access_token,
+                    data: { user: signInData.data.user },
+                  },
+                  function () {}
+                );
+                props.setSignup(true);
               });
-              setSignedIn(true);
-            })
           }
-        }
-        else{
+        } else {
           // eslint-disable-next-line no-undef
-          chrome.storage.local.set({ authToken: data.session.access_token, data: {user: data.user} }, function () {
-          });
-          setSignedIn(true);
+          chrome.storage.local.set(
+            { authToken: data.session.access_token, data: { user: data.user } },
+            function () {}
+          );
+          props.setSignup(true);
         }
       });
   };
@@ -78,8 +87,10 @@ function SignIn(props) {
       <div className="px-4 mt-5" onClick={submitFunc}>
         <ShareButton label="Sign In" />
       </div>
+      {messageDisplay}
       <div className="text-gray-400 px-4 text-xs font-bold mt-[20px]">
-        Don't have an account ? No worries ! Just Sign In and we'll manage the rest.
+        Don't have an account ? No worries ! Just Sign In and we'll manage the
+        rest.
       </div>
     </>
   );
