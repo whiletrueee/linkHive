@@ -1,4 +1,4 @@
-export default [
+export const message = [
     "Reticulating splines...",
     "Generating witty dialog...",
     "Swapping time and space...",
