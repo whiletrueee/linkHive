@@ -8,7 +8,7 @@ function App() {
   const [signup, setSignup] = useState(false);
 
   return (
-    <div className="w-[400px] overflow-hidden bg-black h-[450px] font-roboto">
+    <div className="w-[400px] overflow-hidden bg-black h-[500px] font-roboto">
     <Header signup={signup} setSignup={setSignup} />
     <div className="">
       {signup ? <Main /> : <Signup setSignup={setSignup} />}
