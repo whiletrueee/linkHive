@@ -48,7 +48,7 @@ function SignIn(props) {
                   chrome.storage.local.set(
                     {
                       authToken: signInData.data.session.access_token,
-                      data: { user: signInData.data.user },
+                      data: signInData.data,
                     },
                     function () {}
                   );
