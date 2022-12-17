@@ -12,6 +12,11 @@ function Share() {
   const handleSendto = async () => {
     // eslint-disable-next-line no-undef
     const { authToken } = await chrome.storage.local.get(["authToken"]);
+    // eslint-disable-next-line no-undef
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+      setUrl(tabs[0].url);
+    });
+    
     const headers = { authorization: `Bearer ${authToken}` };
     const data = { url, email: [sendto], message };
     console.log(data, headers);
