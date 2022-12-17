@@ -1,13 +1,19 @@
 {
   "name": "Instant Share",
-  "version": "1.0",
+  "version": "0.0.1",
+  "description": "Instant URL, the easiest way to share an URL.",
   "manifest_version": 3,
   "action": {
     "default_title": "Click to show an alert",
     "default_popup": "index.html"
   },
-  "permissions": ["tabs", "scripting","storage"],
+  "permissions": ["tabs", "scripting", "storage"],
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "/icon_3.png",
+    "48": "/icon_3.png",
+    "128": "/icon_2.png"
   }
 }
