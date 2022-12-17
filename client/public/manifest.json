@@ -1,10 +1,10 @@
 {
-  "name": "Instant Share",
+  "name": "Link Hive",
   "version": "0.0.1",
-  "description": "Instant URL, the easiest way to share an URL.",
+  "description": "Link Hive, the easiest way to share an URL.",
   "manifest_version": 3,
   "action": {
-    "default_title": "Click to show an alert",
+    "default_title": "Click to share link",
     "default_popup": "index.html"
   },
   "permissions": ["tabs", "scripting", "storage"],
