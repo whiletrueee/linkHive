@@ -1,6 +1,12 @@
 import { serve } from "https://deno.land/std@0.131.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { Status } from "https://deno.land/std/http/http_status.ts";
+import Mailgun from "https://deno.land/x/mailgun@v1.1.0/index.ts";
+
+const mailgun = new Mailgun({
+  key: "efb7b5d09724353431cc7b9a81ffcf75-cac494aa-cfee20fa",
+  region: "eu",
+});
 
 serve(async (req) => {
   if (req.method === "GET") {
@@ -36,7 +42,17 @@ serve(async (req) => {
     await supabaseClient
       .from("links")
       .insert({ from: user.email, to: email, message, url });
-    return new Response(JSON.stringify({message: "Successfully sent!"}), {
+    mailgun
+      .send({
+        from: user.email,
+        to: email[0],
+        cc: ["shashankkumarthakur@gmail.com"],
+        subject: "ss",
+        text: "ss",
+      })
+      .then((msg) => console.log(msg)) // logs response data
+      .catch((err) => console.log(err));
+    return new Response(JSON.stringify({ message: "Successfully sent!" }), {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
