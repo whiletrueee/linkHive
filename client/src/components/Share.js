@@ -4,16 +4,24 @@ import ShareButton from "./ShareButton";
 import People from "./People";
 
 function Share() {
-  const [message, setMessage] = useState('');
-  const [success, setSuccess] = useState('');
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
   const [url, setUrl] = useState(window.location.toString());
-  const [sendto, setSendto] = useState('');
+  const [sendto, setSendto] = useState("");
 
   const handleSendto = async () => {
-    const data = {url,email:[sendto],message}
+    // eslint-disable-next-line no-undef
+    const { authToken } = await chrome.storage.local.get(["authToken"]);
+    const headers = { authorization: `Bearer ${authToken}` };
+    const data = { url, email: [sendto], message };
+    console.log(data, headers);
     console.log("handle submit");
     try {
-      const res = await axios.post("https://qgmucqaljwipbdatwznn.functions.supabase.co/send-url", data);
+      const res = await axios.post(
+        "https://qgmucqaljwipbdatwznn.functions.supabase.co/send-url",
+        data,
+        { headers }
+      );
       console.log(res);
       if (res.status === 200) {
         setSuccess(res.data.message);
@@ -21,7 +29,7 @@ function Share() {
       }
     } catch (err) {
       console.log(err);
-      setSuccess('Error');
+      setSuccess("Error");
       return false;
     }
   };
@@ -31,7 +39,7 @@ function Share() {
       <div className="flex flex-col gap-[10px] mt-[20px] px-[20px]">
         <label className="text-pink-500">Enter message</label>
         <input
-        type='text'
+          type="text"
           placeholder="Enter message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -39,7 +47,7 @@ function Share() {
         />
         <label className="text-pink-500">Paste Link to share</label>
         <input
-        type="url"
+          type="url"
           placeholder="Url to be shared"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
@@ -47,7 +55,7 @@ function Share() {
         />
         <label className="text-pink-500">Send to</label>
         <input
-        placeholder="Enter Mail"
+          placeholder="Enter Mail"
           value={sendto}
           onChange={(e) => setSendto(e.target.value)}
           className="outline-none p-2 w-full bg-yellow-600 text-black placeholder:text-black rounded-lg"
@@ -57,8 +65,14 @@ function Share() {
         <People />
         <People />
       </div>
-      <div className="px-4" onClick={()=>{handleSendto()}}>
-        <ShareButton label="Send" /><div className="text-green-600">{success}</div>
+      <div
+        className="px-4"
+        onClick={() => {
+          handleSendto();
+        }}
+      >
+        <ShareButton label="Send" />
+        <div className="text-green-600">{success}</div>
       </div>
     </>
   );

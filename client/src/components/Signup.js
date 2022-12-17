@@ -56,11 +56,12 @@ function SignIn(props) {
                 });
             }
           } else {
+            console.log(data)
             // eslint-disable-next-line no-undef
             chrome.storage.local.set(
               {
                 authToken: data.session.access_token,
-                data: { user: data.user },
+                data: data
               },
               function () {}
             );
