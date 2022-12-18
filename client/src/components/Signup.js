@@ -56,12 +56,12 @@ function SignIn(props) {
                 });
             }
           } else {
-            console.log(data)
+            console.log(data);
             // eslint-disable-next-line no-undef
             chrome.storage.local.set(
               {
                 authToken: data.session.access_token,
-                data: data
+                data: data,
               },
               function () {}
             );
@@ -86,7 +86,7 @@ function SignIn(props) {
           }
         } else {
           setLoginError(true);
-          setLoginErrorMessage("Enter valid credentials")
+          setLoginErrorMessage("Enter valid credentials");
         }
       });
   };
@@ -104,7 +104,7 @@ function SignIn(props) {
         {loginError ? (
           <div className="text-red-600 text-sm mt-2">{loginErrorMessage}</div>
         ) : (
-          <div className="text-black text-sm mt-2">{loginErrorMessage}</div>
+          <div className="text-[#121212] text-sm mt-2">{loginErrorMessage}</div>
         )}
       </div>
 
@@ -112,7 +112,7 @@ function SignIn(props) {
         {mailValidation ? (
           <label className="text-red-600 text-sm">{emailError}</label>
         ) : (
-          <label className="text-black text-sm">{emailError}</label>
+          <label className="text-[#121212] text-sm">{emailError}</label>
         )}
         <input
           type="email"
@@ -123,12 +123,12 @@ function SignIn(props) {
             setMailValidation(false);
             setLoginError(false);
           }}
-          className="outline-none p-2 w-full bg-gray-600 text-gray-200 placeholder:text-gray-200 rounded-lg"
+          className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
         {passwordValidation ? (
           <label className="text-red-600 text-sm">{passwordError}</label>
         ) : (
-          <label className="text-black text-sm">{passwordError}</label>
+          <label className="text-[#121212] text-sm">{passwordError}</label>
         )}
         <input
           type="password"
@@ -139,11 +139,15 @@ function SignIn(props) {
             setpasswordValidation(false);
             setLoginError(false);
           }}
-          className="outline-none p-2 w-full bg-gray-600 text-gray-200 placeholder:text-gray-200 rounded-lg"
+          className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
       </div>
       <div className="px-4 mt-6" onClick={submitFunc}>
-        <ShareButton label="Sign In" />
+        <button
+          className={`bg-purple-800 px-5 py-1 text-white text-sm hover:bg-purple-700 hover:cursor-pointer font-medium`}
+        >
+          Sign In
+        </button>
       </div>
       <div className="text-gray-400 px-4 text-xs font-bold mt-[20px]">
         Don't have an account ? No worries ! Just Sign In and we'll manage the
