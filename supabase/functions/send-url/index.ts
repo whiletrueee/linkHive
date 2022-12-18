@@ -5,7 +5,7 @@ import Mailgun from "https://deno.land/x/mailgun@v1.1.0/index.ts";
 
 const mailgun = new Mailgun({
   key: "efb7b5d09724353431cc7b9a81ffcf75-cac494aa-cfee20fa",
-  region: "eu",
+  domain: 'mail.shashankkumar.xyz'
 });
 
 serve(async (req) => {
@@ -42,16 +42,17 @@ serve(async (req) => {
     await supabaseClient
       .from("links")
       .insert({ from: user.email, to: email, message, url });
-    mailgun
+    email.forEach(element => {
+      mailgun
       .send({
-        from: user.email,
-        to: email[0],
-        cc: ["shashankkumarthakur@gmail.com"],
-        subject: "ss",
-        text: "ss",
+        from: `${user.email}`,
+        to: element,
+        subject: "You have recieved a new link!",
+        text: `${message ?? ''}: ${url}`,
       })
       .then((msg) => console.log(msg)) // logs response data
       .catch((err) => console.log(err));
+    });
     return new Response(JSON.stringify({ message: "Successfully sent!" }), {
       headers: {
         "Content-Type": "application/json",
