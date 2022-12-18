@@ -4,7 +4,7 @@ import { Status } from "https://deno.land/std/http/http_status.ts";
 import Mailgun from "https://deno.land/x/mailgun@v1.1.0/index.ts";
 
 const mailgun = new Mailgun({
-  key: "efb7b5d09724353431cc7b9a81ffcf75-cac494aa-cfee20fa",
+  key: Deno.env.get("MAILGUN_KEY"),
   domain: 'mail.shashankkumar.xyz'
 });
 
