@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Icon from "../icons/icon_3.png";
 
 function Header(props) {
   const [userName, setUsername] = useState("username");

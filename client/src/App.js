@@ -6,6 +6,7 @@ import Header from "./components/Header";
 
 function App() {
   const [signup, setSignup] = useState(false);
+  
   useEffect(() => {
     // eslint-disable-next-line no-undef
     chrome.storage.local.get(["data"]).then((result) => {
@@ -14,7 +15,7 @@ function App() {
         setSignup(true);
       }
     });
-  }, []);
+  });
 
   const onLogout = () => {
     // eslint-disable-next-line no-undef
@@ -23,7 +24,7 @@ function App() {
   };
 
   return (
-    <div className="w-[400px] overflow-hidden bg-black h-[500px] font-roboto relative">
+    <div className="w-[430px] overflow-hidden bg-black h-[500px] font-roboto relative">
       <Header signup={signup} setSignup={setSignup} />
       <div className="">
         {signup ? <Main /> : <Signup setSignup={setSignup} />}
