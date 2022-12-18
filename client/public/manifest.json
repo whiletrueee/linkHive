@@ -7,7 +7,7 @@
     "default_title": "Click to share link",
     "default_popup": "index.html"
   },
-  "permissions": ["tabs", "scripting", "storage"],
+  "permissions": ["tabs", "storage"],
   "background": {
     "service_worker": "background.js"
   },

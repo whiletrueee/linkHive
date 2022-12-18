@@ -15,7 +15,7 @@ function Header(props) {
     .catch((e) => console.log(e));
 
   return (
-    <div className="flex justify-between w-[400px] bg-black border-b-2 border-gray-700 p-2 text-white font-bold text-base items-center">
+    <div className="flex justify-between w-[440px] bg-[#121212] border-b-2 border-gray-700 p-2 text-white font-bold text-base items-center">
       Link Hive
       {props.signup ? (
         <div className="font-medium text-xs flex gap-1 items-center">

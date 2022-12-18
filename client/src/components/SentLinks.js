@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function RecvLinks() {
-  const [recvFrom, setRecvFrom] = useState();
+function SentLinks() {
+  const [sentTo, setSentTo] = useState();
   useEffect(() => {
     // eslint-disable-next-line no-undef
     chrome.storage.local
@@ -14,8 +14,8 @@ function RecvLinks() {
             headers,
           })
           .then((res) => {
-            console.log(res.data.to);
-            setRecvFrom(res.data.to);
+            console.log(res.data.from.to);
+            setSentTo(res.data.from);
           });
       })
       .catch((e) => console.log(e));
@@ -23,14 +23,15 @@ function RecvLinks() {
 
   return (
     <div className="flex flex-col gap-2 text-white mx-4 overflow-y-scroll h-[370px] mt-[10px]">
-      {recvFrom &&
-        recvFrom.map((item, i) => {
+      {sentTo &&
+        sentTo.map((item, i) => {
           return (
             <div
               className="flex flex-col justify-between text-sm border-[0.5px] border-[#121212] font-thin my-1 p-2 hover:border-[0.5px] hover:border-[#1D1D1D] hover:cursor-pointer duration-200"
               key={i}
             >
-              <div className="py-1 text-pink-500 font-medium">{item.from}</div>
+
+              <div className="py-1 text-purple-500 font-medium">{item.to[0]}</div>
 
               <div className="py-1 text-gray-400 overflow-hidden hover:text-gray-100">
                 <a href={item.url} target="_blank" rel="noreferrer">
@@ -43,4 +44,4 @@ function RecvLinks() {
     </div>
   );
 }
-export default RecvLinks;
+export default SentLinks;

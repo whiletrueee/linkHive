@@ -24,7 +24,7 @@ function App() {
   };
 
   return (
-    <div className="w-[430px] overflow-hidden bg-black h-[500px] font-roboto relative">
+    <div className="w-[440px] overflow-hidden bg-[#121212] h-[500px] font-roboto relative">
       <Header signup={signup} setSignup={setSignup} />
       <div className="">
         {signup ? <Main /> : <Signup setSignup={setSignup} />}

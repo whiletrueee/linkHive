@@ -49,7 +49,7 @@ function Share() {
           placeholder="Enter message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="outline-none p-2 w-full bg-gray-600 text-gray-200 placeholder:text-gray-200 rounded-lg"
+          className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
         <label className="text-pink-500">Paste Link to share</label>
         <input
@@ -57,27 +57,28 @@ function Share() {
           placeholder="Url to be shared"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          className="outline-none p-2 w-full bg-gray-600 text-gray-200 placeholder:text-gray-200 rounded-lg"
+          className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
         <label className="text-pink-500">Send to</label>
         <input
           placeholder="Enter Mail"
           value={sendto}
           onChange={(e) => setSendto(e.target.value)}
-          className="outline-none p-2 w-full bg-yellow-600 text-black placeholder:text-black rounded-lg"
+          className="duration-200 border border-t-[#121212] border-r-[#121212] border-l-[#121212] border-b-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
       </div>
-      <div className="m-[20px] flex gap-4 flex-wrap">
-        <People />
-        <People />
-      </div>
+
       <div
-        className="px-4"
+        className="px-4 mt-5"
         onClick={() => {
           handleSendto();
         }}
       >
-        <ShareButton label="Send" />
+        <button
+          className={`bg-purple-800 px-5 py-1 text-white text-sm hover:bg-purple-700 hover:cursor-pointer font-medium`}
+        >
+          Send
+        </button>
         <div className="text-green-600">{success}</div>
       </div>
     </>
