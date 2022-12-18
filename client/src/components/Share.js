@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import ShareButton from "./ShareButton";
 import People from "./People";
@@ -6,21 +6,15 @@ import People from "./People";
 function Share() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
-  const [url, setUrl] = useState(window.location.toString());
+  const [url, setUrl] = useState("");
   const [sendto, setSendto] = useState("");
 
   const handleSendto = async () => {
     // eslint-disable-next-line no-undef
     const { authToken } = await chrome.storage.local.get(["authToken"]);
     // eslint-disable-next-line no-undef
-    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-      setUrl(tabs[0].url);
-    });
-    
     const headers = { authorization: `Bearer ${authToken}` };
     const data = { url, email: [sendto], message };
-    console.log(data, headers);
-    console.log("handle submit");
     try {
       const res = await axios.post(
         "https://qgmucqaljwipbdatwznn.functions.supabase.co/send-url",
@@ -38,6 +32,13 @@ function Share() {
       return false;
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+      setUrl(tabs[0].url);
+    });
+  }, []);
 
   return (
     <>
