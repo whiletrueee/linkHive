@@ -7,7 +7,7 @@ export const SignInSchema = yup.object().shape({
 
 export const ShareSchema = yup.object().shape({
   message: yup.string(),
-  email: yup.string().email("Please provide valid email").required(),
+  email: yup.array().of(yup.string().email("Please provide valid email").required()),
   url: yup
     .string()
     .matches(
