@@ -40,6 +40,28 @@ $ npm run build
 
 <br>
 
+## Preview :
+
+Signup:
+<br><br>
+
+<img width="443" alt="Screenshot 2022-12-19 at 11 52 40 AM" src="https://user-images.githubusercontent.com/74819565/208416337-e98d2e0a-f6ce-48e2-a2f5-1d641d1685cc.png">
+<br>
+
+Send Link:
+<br><br>
+
+<img width="444" alt="Screenshot 2022-12-19 at 4 48 46 PM" src="https://user-images.githubusercontent.com/74819565/208416476-a244c9e6-4d6b-4bf9-bcfc-37321db3d332.png">
+
+<br>
+Your links:
+<br><br>
+
+<img width="444" alt="Screenshot 2022-12-19 at 1 55 57 PM (1)" src="https://user-images.githubusercontent.com/74819565/208416610-17b8ac41-3e62-4477-8639-18a2f4eddf53.png">
+
+
+<br>
+
 ## Creators💥
 
 | <p align="center">![Shashank kumar](https://github.com/shawshankkumar.png?size=128)<br>[Shashank Kumar](https://github.com/shawshankkumar)</p> | <p align="center">![Harshit Singh](https://github.com/flying-solo.png?size=128)<br>[Harshit Singh](https://github.com/flying-solo)</p> |
