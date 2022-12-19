@@ -9,10 +9,12 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
+    "javascript-time-ago": "^2.5.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-scripts": "5.0.1",
+    "time-ago": "^0.2.1",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
@@ -31,7 +33,6 @@
     "eject": "react-scripts eject",
     "watch": "npm-watch"
   },
-  
   "eslintConfig": {
     "extends": [
       "react-app",
