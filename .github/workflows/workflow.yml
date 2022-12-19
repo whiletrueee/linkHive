@@ -7,11 +7,12 @@ on:
   pull_request:
     branches:
       - master
-
+defaults:
+  run:
+    working-directory: dart_project
 jobs:
   build:
     runs-on: ubuntu-latest
-    working-directory: client
 
     steps:
       - name: Checkout to the repository
