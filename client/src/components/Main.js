@@ -45,7 +45,7 @@ function Main() {
             setSentLink(true);
           }}
         >
-          SentLinks
+          Sent Links
         </div>
       </div>
       {sendLink ? (

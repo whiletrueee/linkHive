@@ -10,7 +10,7 @@ function RecvLinks() {
       .then((token) => {
         const headers = { authorization: `Bearer ${token.authToken}` };
         axios
-          .get("https://qgmucqaljwipbdatwznn.functions.supabase.co/all-links", {
+          .get(process.env.REACT_APP_SUPABASE_ALL_LINKS, {
             headers,
           })
           .then((res) => {

@@ -1,12 +1,11 @@
 import { useState } from "react";
-import ShareButton from "./ShareButton";
 import { createClient } from "@supabase/supabase-js";
 import { SignInSchema } from "./Validation";
 
 function SignIn(props) {
   const supabase = createClient(
-    "https://qgmucqaljwipbdatwznn.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnbXVjcWFsandpcGJkYXR3em5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTk1NDM2MDYsImV4cCI6MTk3NTExOTYwNn0.RIBHHg5wOIFBjBMCmPNbLD2DP6YkLJvG9kLaB5UWDqA"
+    process.env.REACT_APP_SUPABASE_URL,
+    process.env.REACT_APP_SUPABASE_KEY
   );
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
