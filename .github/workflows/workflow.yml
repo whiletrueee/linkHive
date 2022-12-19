@@ -1,4 +1,3 @@
-
 name: Continuous Integration (CI)
 
 on:
@@ -8,21 +7,21 @@ on:
   pull_request:
     branches:
       - master
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
     working-directory: client
-    
+
     steps:
       - name: Checkout to the repository
         uses: actions/checkout@v2
-        
+
       - name: Set up NodeJS environment
         uses: actions/setup-node@v2
         with:
-          node-version-file: '.nvmrc'
-        
+          node-version-file: ".nvmrc"
+
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -35,13 +34,13 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-       
+
       - name: Install package dependencies
         run: npm install
-      
+
       - name: Execute test cases
         run: npm run test
-        
+
       - name: Create test build
         run: npm run build
 
@@ -53,6 +52,3 @@ jobs:
 
       - name: Remove zip
         run: rm -r latest.zip
-      
-    
-view rawCI.yml hosted with ❤ by GitHub
