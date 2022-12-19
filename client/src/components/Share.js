@@ -1,36 +1,50 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ShareButton from "./ShareButton";
-import People from "./People";
+import { ShareSchema } from "./Validation";
 
 function Share() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
   const [url, setUrl] = useState("");
   const [sendto, setSendto] = useState("");
+  const [errorLogs, setErrorLogs] = useState(null);
 
   const handleSendto = async () => {
-    // eslint-disable-next-line no-undef
-    const { authToken } = await chrome.storage.local.get(["authToken"]);
-    // eslint-disable-next-line no-undef
-    const headers = { authorization: `Bearer ${authToken}` };
-    const data = { url, email: [sendto], message };
-    try {
-      const res = await axios.post(
-        "https://qgmucqaljwipbdatwznn.functions.supabase.co/send-url",
-        data,
-        { headers }
-      );
-      console.log(res);
-      if (res.status === 200) {
-        setSuccess(res.data.message);
-        return true;
-      }
-    } catch (err) {
-      console.log(err);
-      setSuccess("Error");
-      return false;
-    }
+    setErrorLogs(null);
+    ShareSchema.validate(
+      {
+        message: message,
+        email: sendto,
+        url: url,
+      },
+      { abortEarly: false }
+    )
+      .then((responseData) => {
+        // eslint-disable-next-line no-undef
+        chrome.storage.local.get(["authToken"]).then((token) => {
+          const headers = { authorization: `Bearer ${token.authToken}` };
+          axios
+            .post(process.env.REACT_APP_SUPABASE_POSTLINK, responseData, {
+              headers,
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.status === 200) {
+                setSuccess(res.data.message);
+                return true;
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              setSuccess("Error");
+              return false;
+            });
+        });
+      })
+      .catch((err) => {
+        console.log(err.errors);
+        setErrorLogs(err.errors);
+      });
   };
 
   useEffect(() => {
@@ -43,7 +57,7 @@ function Share() {
   return (
     <>
       <div className="flex flex-col gap-[10px] mt-[20px] px-[20px]">
-        <label className="text-pink-500">Enter message</label>
+        <label className="text-yellow-500">Enter message</label>
         <input
           type="text"
           placeholder="Enter message"
@@ -51,7 +65,7 @@ function Share() {
           onChange={(e) => setMessage(e.target.value)}
           className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
-        <label className="text-pink-500">Paste Link to share</label>
+        <label className="text-yellow-500">Paste Link to share</label>
         <input
           type="url"
           placeholder="Url to be shared"
@@ -59,7 +73,7 @@ function Share() {
           onChange={(e) => setUrl(e.target.value)}
           className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
-        <label className="text-pink-500">Send to</label>
+        <label className="text-yellow-500">Send to</label>
         <input
           placeholder="Enter Mail"
           value={sendto}
@@ -79,6 +93,16 @@ function Share() {
         >
           Send
         </button>
+        <div className="flex flex-col justify-between gap-2 text-red-500 font-thin text-sm mt-2">
+          {errorLogs &&
+            errorLogs.map((item, i) => {
+              return (
+                <div className="" key={i}>
+                  {item}
+                </div>
+              );
+            })}
+        </div>
         <div className="text-green-600">{success}</div>
       </div>
     </>
