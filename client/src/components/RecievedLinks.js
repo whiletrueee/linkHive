@@ -26,9 +26,9 @@ function RecvLinks() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 text-white mx-4 overflow-y-scroll h-[370px] mt-[10px]">
+    <div className="flex flex-col gap-2 text-white mx-4 overflow-y-scroll h-[350px] mt-[10px]">
       {recvFrom &&
-        recvFrom.map((item, i) => {
+        recvFrom.reverse().map((item, i) => {
           const timeRelative = timeAgo.format(+new Date(item.created_at));
           return (
             <div

@@ -31,7 +31,7 @@ function App() {
       </div>
       {signup ? (
         <div
-          className="text-white absolute bottom-3 right-3 text-base hover:cursor-pointer hover:text-red-500"
+          className="text-white bg-[#121212] p-2 absolute bottom-3 right-3 text-base hover:cursor-pointer hover:text-red-500"
           onClick={onLogout}
         >
           Logout
