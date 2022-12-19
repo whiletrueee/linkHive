@@ -9,7 +9,7 @@ on:
       - master
 defaults:
   run:
-    working-directory: dart_project
+    working-directory: client
 jobs:
   build:
     runs-on: ubuntu-latest
