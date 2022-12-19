@@ -15,7 +15,7 @@ function Share() {
     ShareSchema.validate(
       {
         message: message,
-        email: sendto,
+        email: [sendto],
         url: url,
       },
       { abortEarly: false }
