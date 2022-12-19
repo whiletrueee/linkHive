@@ -61,19 +61,19 @@ $ npm run build
 
 ### Supabase Auth:
 
-#### Our entire product revolves around sending and receiving links. To send a link you have to be registered and logged in, and we use emails for that. So that we can easily identify you and then use that to send the emails. We could have made a custom auth but we thought we'd give supabase auth(email and password) a try and it was smooth like butter. We couldn't find any examples of chrome extensions using supabase auth, so we made our own! (Expect an blog on using supabase auth with chrome extension real soon). We use the access_token from supabase auth paired with edge functions to implement seamless flow with RLS.
+Our entire product revolves around sending and receiving links. To send a link you have to be registered and logged in, and we use emails for that. So that we can easily identify you and then use that to send the emails. We could have made a custom auth but we thought we'd give supabase auth(email and password) a try and it was smooth like butter. We couldn't find any examples of chrome extensions using supabase auth, so we made our own! (Expect an blog on using supabase auth with chrome extension real soon). We use the access_token from supabase auth paired with edge functions to implement seamless flow with RLS.
 
 <br>
 
 ### Supabase Database
 
-#### We use supabase database (Postgres at core) to store the emails, links and messages that have been sent by a user. We also use the database to store user preferences (coming soon).
+We use supabase database (Postgres at core) to store the emails, links and messages that have been sent by a user. We also use the database to store user preferences (coming soon).
 
 <br>
 
 ### Supabase Edge Functions
 
-#### With Edge Functions powered by Deno, our job to develop APIs became extremely easy. We literally made this in a couple of days due to our university exams and developing with edge functions was like creating functions for every use case. We first created a send-link function, then when the need came, we made the fetch links function. We didn't have to manage any servers or deployments, supabase cli did everything in seconds. We are also working on analytics(The sender can see how many times a link has been opened and from where) and for that we are creating an entire URL shortener using edge functions.
+With Edge Functions powered by Deno, our job to develop APIs became extremely easy. We literally made this in a couple of days due to our university exams and developing with edge functions was like creating functions for every use case. We first created a send-link function, then when the need came, we made the fetch links function. We didn't have to manage any servers or deployments, supabase cli did everything in seconds. We are also working on analytics(The sender can see how many times a link has been opened and from where) and for that we are creating an entire URL shortener using edge functions.
 
 <br>
 ## License 📜
