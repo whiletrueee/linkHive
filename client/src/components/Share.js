@@ -8,6 +8,7 @@ function Share() {
   const [url, setUrl] = useState("");
   const [sendto, setSendto] = useState("");
   const [errorLogs, setErrorLogs] = useState(null);
+  const [recent, setRecent] = useState("");
 
   const handleSendto = async () => {
     setErrorLogs(null);
@@ -20,17 +21,20 @@ function Share() {
       { abortEarly: false }
     )
       .then((responseData) => {
+        const data = {message,email:[responseData.email],url}
         // eslint-disable-next-line no-undef
         chrome.storage.local.get(["authToken"]).then((token) => {
           const headers = { authorization: `Bearer ${token.authToken}` };
           axios
-            .post(process.env.REACT_APP_SUPABASE_POSTLINK, responseData, {
+            .post(process.env.REACT_APP_SUPABASE_POSTLINK, data, {
               headers,
             })
             .then((res) => {
               console.log(res);
               if (res.status === 200) {
                 setSuccess(res.data.message);
+                setMessage("");
+                setSendto("");
                 return true;
               }
             })
@@ -52,7 +56,27 @@ function Share() {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
       setUrl(tabs[0].url);
     });
-  }, []);
+  }, [success]);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    chrome.storage.local
+      .get(["authToken"])
+      .then((token) => {
+        const headers = { authorization: `Bearer ${token.authToken}` };
+        axios
+          .get(process.env.REACT_APP_SUPABASE_FAV_MAIL, {
+            headers,
+          })
+          .then((res) => {
+            if(res.data.emails.length<1){
+              setRecent(undefined);
+            }
+            setRecent(res.data.emails);
+          });
+      })
+      .catch((e) => console.log(e));
+  }, [success]);
 
   return (
     <>
@@ -81,7 +105,15 @@ function Share() {
           className="duration-200 border border-t-[#121212] border-r-[#121212] border-l-[#121212] border-b-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
       </div>
-
+      <div className="mx-4 mt-2 flex flex-wrap justify-start gap-1 text-xs ">
+        {recent && recent.map((item, i) => {
+          return (
+            <div key={i} className="text-white p-2 bg-green-700 hover:cursor-pointer hover:bg-green-600 " onClick={() => setSendto(item)}>
+              {item}
+            </div>
+          );
+        })}
+      </div>
       <div
         className="px-4 mt-5"
         onClick={() => {
