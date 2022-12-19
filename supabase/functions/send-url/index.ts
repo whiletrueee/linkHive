@@ -42,6 +42,7 @@ serve(async (req) => {
     await supabaseClient
       .from("links")
       .insert({ from: user.email, to: email, message, url });
+      console.log("email", email)
     email.forEach(element => {
       mailgun
       .send({
