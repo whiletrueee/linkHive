@@ -5,9 +5,9 @@ import Mailgun from "https://deno.land/x/mailgun@v1.1.0/index.ts";
 
 const mailgun = new Mailgun({
   key: Deno.env.get("MAILGUN_KEY"),
-  domain: 'mail.shashankkumar.xyz'
+  domain: 'alt-mail.shawshankkumar.me'
 });
-
+console.log(Deno.env.get("MAILGUN_KEY"))
 serve(async (req) => {
   if (req.method === "GET") {
     return new Response("GET is not valid.", { status: 400 });
