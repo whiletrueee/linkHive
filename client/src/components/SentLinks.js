@@ -38,6 +38,7 @@ function SentLinks() {
                   {item.url}
                 </a>
               </div>
+              <div className="text-green-500 text-xs font-medium ml-auto">date</div>
             </div>
           );
         })}
