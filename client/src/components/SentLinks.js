@@ -1,5 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
 function SentLinks() {
   const [sentTo, setSentTo] = useState();
@@ -25,6 +29,7 @@ function SentLinks() {
     <div className="flex flex-col gap-2 text-white mx-4 overflow-y-scroll h-[370px] mt-[10px]">
       {sentTo &&
         sentTo.map((item, i) => {
+          const timeRelative = timeAgo.format(+new Date(item.created_at));
           return (
             <div
               className="flex flex-col justify-between text-sm border-[0.5px] border-[#121212] font-thin my-1 p-2 hover:border-[0.5px] hover:border-[#1D1D1D] hover:cursor-pointer duration-200"
@@ -38,7 +43,7 @@ function SentLinks() {
                   {item.url}
                 </a>
               </div>
-              <div className="text-green-500 text-xs font-medium ml-auto">date</div>
+              <div className="text-green-500 text-xs font-medium ml-auto">{timeRelative ?? ''}</div>
             </div>
           );
         })}
