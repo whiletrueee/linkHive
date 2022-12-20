@@ -7,6 +7,8 @@ function SignIn(props) {
     process.env.REACT_APP_SUPABASE_URL,
     process.env.REACT_APP_SUPABASE_KEY
   );
+  const [fetching, setfetching] = useState(false);
+  // -------------------------------------------------
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   // ---------------------------------------------------------------
@@ -28,6 +30,7 @@ function SignIn(props) {
       { abortEarly: false }
     )
       .then((responseData) => {
+        setfetching(true);
         supabase.auth.signUp(responseData).then((e) => {
           const { data, error } = e;
           if (error) {
@@ -51,6 +54,7 @@ function SignIn(props) {
                     },
                     function () {}
                   );
+                  setfetching(false);
                   props.setSignup(true);
                 });
             }
@@ -65,6 +69,7 @@ function SignIn(props) {
               function () {}
             );
             props.setSignup(true);
+            setfetching(false);
           }
         });
       })
@@ -141,13 +146,24 @@ function SignIn(props) {
           className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
       </div>
-      <div className="px-4 mt-6" onClick={submitFunc}>
-        <button
-          className={`bg-purple-800 px-5 py-1 text-white text-sm hover:bg-purple-700 hover:cursor-pointer font-medium`}
-        >
-          Sign In
-        </button>
-      </div>
+      {fetching ? (
+        <div className="px-4 mt-6">
+          <div
+            className={`bg-purple-800 px-5 py-1 text-white w-fit text-sm font-medium animate-pulse`}
+          >
+            Fetching
+          </div>
+        </div>
+      ) : (
+        <div className="px-4 mt-6" onClick={submitFunc}>
+          <button
+            className={`bg-purple-800 px-5 py-1 text-white text-sm hover:bg-purple-700 hover:cursor-pointer font-medium`}
+          >
+            Sign In
+          </button>
+        </div>
+      )}
+
       <div className="text-gray-400 px-4 text-xs font-bold mt-[20px]">
         Don't have an account ? No worries ! Just Sign In and we'll manage the
         rest.
