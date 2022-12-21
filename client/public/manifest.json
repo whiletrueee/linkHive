@@ -1,6 +1,6 @@
 {
   "name": "Link Hive",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Link Hive, the easiest way to share an URL.",
   "manifest_version": 3,
   "action": {
