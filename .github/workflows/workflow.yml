@@ -45,8 +45,5 @@ jobs:
       - name: Zip file
         run: zip -r latest.zip build
 
-      - name: Copy to latest-build
-        run: cp -r ../ latest-build latest.zip
-
       - name: Remove zip
         run: rm -r latest.zip
