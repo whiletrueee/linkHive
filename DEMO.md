@@ -1,5 +1,7 @@
 ## Demo
 
-Our extension is still in the review, we will paste the link to the extension store as soon as we get it. But we have attached a video demo of how the entire thing works. If you wish to run it, you can download the latest build file from /client/latest-build and unzip it and run it on chrome.
+Our extension has been published but due to the long time taken by chrome extension store, the latest version might not be available on the store. You can still download Link Hive from the store or choose to download the freshest build from the client subdirectory (client/latest-build). 
 
 [Watch the video](https://www.loom.com/embed/71f26169f0fc4633addd592df08fd7b6)
+
+[Download the extension](https://chrome.google.com/webstore/detail/link-hive/djdnghagfkekimgckhcmphkgmhlnhcdo?hl=en)
