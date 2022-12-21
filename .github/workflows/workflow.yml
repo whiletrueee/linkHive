@@ -45,10 +45,10 @@ jobs:
       - name: Zip file
         run: zip -r latest.zip build
 
-      - name: Remove zip
-        run: rm -r latest.zip
-
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply changes
+
+      - name: Remove zip
+        run: rm -r latest.zip
