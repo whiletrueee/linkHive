@@ -45,6 +45,9 @@ jobs:
       - name: Zip file
         run: zip -r latest.zip build
 
+      - name: Move zip file
+        run: mv latest.zip latest-build
+
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
