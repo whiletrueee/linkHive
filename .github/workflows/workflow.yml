@@ -45,5 +45,5 @@ jobs:
       - name: Zip file
         run: zip -r latest.zip build
 
-      - name: Remove zip
-        run: rm -r latest.zip
+      # - name: Remove zip
+      #   run: rm -r latest.zip
