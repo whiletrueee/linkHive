@@ -16,7 +16,7 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your besties,<a hr
 </p>
 <br>
 
-### While we have applied for this to be deployed on the chrome extension store, it is yet to be approved. If you want to run this locally, we recommend going in the client/latest-build folder and unzipping the latest version there and then loading it into the chrome dev tools. Everything will work as excepted.
+### Checkout [DEMO.md](https://github.com/flying-solo/linkHive/blob/master/DEMO.md)
 
 <br>
 
