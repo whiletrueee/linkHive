@@ -48,6 +48,7 @@ jobs:
       - name: Remove zip
         run: rm -r latest.zip
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Apply changes
