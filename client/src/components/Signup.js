@@ -43,6 +43,7 @@ function SignIn(props) {
                     console.log(signInData.error);
                     setLoginErrorMessage(signInData.error.message);
                     setLoginError(true);
+                    setfetching(false);
                     return;
                   }
                   console.log(signInData);
@@ -90,6 +91,7 @@ function SignIn(props) {
           }
         } else {
           setLoginError(true);
+          setfetching(false);
           setLoginErrorMessage("Enter valid credentials");
         }
       });
@@ -127,7 +129,9 @@ function SignIn(props) {
             setMailValidation(false);
             setLoginError(false);
           }}
-          className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
+          className={` duration-200 border ${
+            loginError ? "border-red-600" : "border-[#343434]"
+          } outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]`}
         />
         {passwordValidation ? (
           <label className="text-red-600 text-sm">{passwordError}</label>
@@ -143,7 +147,9 @@ function SignIn(props) {
             setpasswordValidation(false);
             setLoginError(false);
           }}
-          className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
+          className={`duration-200 border ${
+            loginError ? "border-red-600" : "border-[#343434]"
+          }  outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]`}
         />
       </div>
       {fetching ? (
@@ -155,8 +161,10 @@ function SignIn(props) {
           </div>
         </div>
       ) : (
-        <div className="px-4 mt-6" onClick={submitFunc}>
+        <div className="px-4 mt-6">
           <button
+            onClick={submitFunc}
+            type="submit"
             className={`bg-purple-800 px-5 py-1 text-white text-sm hover:bg-purple-700 hover:cursor-pointer font-medium`}
           >
             Sign In
@@ -164,7 +172,7 @@ function SignIn(props) {
         </div>
       )}
 
-      <div className="text-gray-400 px-4 text-xs font-bold mt-[20px]">
+      <div className="text-gray-300 px-4 text-xs font-bold mt-[20px]">
         Don't have an account ? No worries ! Just Sign In and we'll manage the
         rest.
       </div>

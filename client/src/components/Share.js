@@ -9,6 +9,7 @@ function Share() {
   const [sendto, setSendto] = useState("");
   const [errorLogs, setErrorLogs] = useState(null);
   const [recent, setRecent] = useState("");
+  const [sending, setSending] = useState(false);
 
   const handleSendto = async () => {
     setErrorLogs(null);
@@ -21,9 +22,10 @@ function Share() {
       { abortEarly: false }
     )
       .then((responseData) => {
-        const data = {message,email:[responseData.email],url}
+        const data = { message, email: [responseData.email], url };
         // eslint-disable-next-line no-undef
         chrome.storage.local.get(["authToken"]).then((token) => {
+          setSending(true);
           const headers = { authorization: `Bearer ${token.authToken}` };
           axios
             .post(process.env.REACT_APP_SUPABASE_POSTLINK, data, {
@@ -35,17 +37,20 @@ function Share() {
                 setSuccess(res.data.message);
                 setMessage("");
                 setSendto("");
+                setSending(false);
                 return true;
               }
             })
             .catch((err) => {
               console.log(err);
+              setSending(false);
               setSuccess("Error");
               return false;
             });
         });
       })
       .catch((err) => {
+        setSending(false);
         console.log(err.errors);
         setErrorLogs(err.errors);
       });
@@ -69,17 +74,18 @@ function Share() {
             headers,
           })
           .then((res) => {
-            if(res.data.emails.length<1){
+            if (res.data.emails.length < 1) {
               setRecent(undefined);
+            } else {
+              setRecent(res.data.emails);
             }
-            setRecent(res.data.emails);
           });
       })
       .catch((e) => console.log(e));
   }, [success]);
 
   return (
-    <>
+    <div className=" overflow-y-scroll">
       <div className="flex flex-col gap-[10px] mt-[20px] px-[20px]">
         <label className="text-yellow-500">Enter message</label>
         <input
@@ -106,24 +112,29 @@ function Share() {
         />
       </div>
       <div className="mx-4 mt-2 flex flex-wrap justify-start gap-1 text-xs ">
-        {recent && recent.map((item, i) => {
-          return (
-            <div key={i} className="text-white p-2 bg-green-700 hover:cursor-pointer hover:bg-green-600 " onClick={() => setSendto(item)}>
-              {item}
-            </div>
-          );
-        })}
+        {recent &&
+          recent.map((item, i) => {
+            return (
+              <div
+                key={i}
+                className="text-white p-2 bg-green-700 hover:cursor-pointer hover:bg-green-600 "
+                onClick={() => setSendto(item)}
+              >
+                {item}
+              </div>
+            );
+          })}
       </div>
-      <div
-        className="px-4 mt-5"
-        onClick={() => {
-          handleSendto();
-        }}
-      >
+      <div className="px-4 mt-5">
         <button
+          disabled={sending}
+          onClick={() => {
+            handleSendto();
+          }}
+          type="submit"
           className={`bg-purple-800 px-5 py-1 text-white text-sm hover:bg-purple-700 hover:cursor-pointer font-medium`}
         >
-          Send
+          {sending ? "Sending . . . " : "Send"}
         </button>
         <div className="flex flex-col justify-between gap-2 text-red-500 font-thin text-sm mt-2">
           {errorLogs &&
@@ -137,7 +148,7 @@ function Share() {
         </div>
         <div className="text-green-600">{success}</div>
       </div>
-    </>
+    </div>
   );
 }
 
