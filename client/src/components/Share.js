@@ -6,17 +6,18 @@ function Share() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
   const [url, setUrl] = useState("");
-  const [sendto, setSendto] = useState("");
+  const [sendto, setSendto] = useState([]);
   const [errorLogs, setErrorLogs] = useState(null);
-  const [recent, setRecent] = useState("");
+  const [recent, setRecent] = useState([]);
   const [sending, setSending] = useState(false);
 
   const handleSendto = async () => {
+    console.log(sendto);
     setErrorLogs(null);
     ShareSchema.validate(
       {
         message: message,
-        email: [sendto],
+        email: sendto,
         url: url,
       },
       { abortEarly: false }
@@ -74,6 +75,7 @@ function Share() {
             headers,
           })
           .then((res) => {
+            console.log(res);
             if (res.data.emails.length < 1) {
               setRecent(undefined);
             } else {
@@ -103,11 +105,13 @@ function Share() {
           onChange={(e) => setUrl(e.target.value)}
           className="duration-200 border border-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
-        <label className="text-yellow-500">Send to</label>
+        <label className="text-yellow-500">Send to {sendto}</label>
         <input
+          type="email"
+          multiple
           placeholder="Enter Mail"
-          value={sendto}
-          onChange={(e) => setSendto(e.target.value)}
+          value={Array.isArray(sendto) ? sendto.join(" ") : sendto}
+          onChange={(e) => setSendto(e.target.value.split(" "))}
           className="duration-200 border border-t-[#121212] border-r-[#121212] border-l-[#121212] border-b-[#343434] outline-none p-2 w-full bg-[#121212] text-gray-200 placeholder:text-[#4B4B4B]"
         />
       </div>
