@@ -7,7 +7,7 @@
 Meet Live Hive, the easiest way of sharing an URL.
 </p>
 <p align="center">
-crafted with <span style="color: #8b0000;">&hearts;</span> by your besties,<a hrefs="https://github,com/shawshankkumar"> Shashank</a> and <a hrefs="https://github.com/flying-solo">Harshit</a>.
+crafted with <span style="color: #8b0000;">&hearts;</span> by your besties,<a hrefs="https://github,com/shawshankkumar"> Shashank</a> and <a hrefs="https://github.com/whiletrueee">Harshit</a>.
 </p>
 <p align="center">
     <img src="https://img.shields.io/badge/version-1.0.0-yellowgreen" alt="version 1.0.0"/>
@@ -16,7 +16,7 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your besties,<a hr
 </p>
 <br>
 
-### Checkout [DEMO.md](https://github.com/flying-solo/linkHive/blob/master/DEMO.md)
+### Checkout [DEMO.md](https://github.com/whiletrueee/linkHive/blob/master/DEMO.md)
 
 <br>
 
@@ -64,7 +64,7 @@ Your links:
 
 ## Creators💥
 
-| <p align="center">![Shashank kumar](https://github.com/shawshankkumar.png?size=128)<br>[Shashank Kumar](https://github.com/shawshankkumar)</p> | <p align="center">![Harshit Singh](https://github.com/flying-solo.png?size=128)<br>[Harshit Singh](https://github.com/flying-solo)</p> |
+| <p align="center">![Shashank kumar](https://github.com/shawshankkumar.png?size=128)<br>[Shashank Kumar](https://github.com/shawshankkumar)</p> | <p align="center">![Harshit Singh](https://github.com/whiletrueee.png?size=128)<br>[Harshit Singh](https://github.com/whiletrueee)</p> |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 
 [Shashank's twitter handle](https://twitter.com/Ka_redemption)
@@ -73,7 +73,7 @@ Your links:
 <br>
 [Harshit's twitter handle](https://twitter.com/singharshit07)
 <br>
-[Harshit's github profile](https://github.com/flying-solo)
+[Harshit's github profile](https://github.com/whiletrueee)
 
 <br>
 
